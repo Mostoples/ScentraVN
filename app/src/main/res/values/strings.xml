@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">BioCompare</string>
+
+    <!-- Permissions -->
+    <string name="perm_rationale_title">Izin Diperlukan</string>
+    <string name="perm_rationale_bluetooth">Aplikasi memerlukan izin Bluetooth untuk terhubung ke perangkat Anda (Smartwatch ESP32-C3 dan Muse S).</string>
+    <string name="perm_rationale_notification">Izin notifikasi diperlukan agar layanan latar belakang dapat berjalan saat merekam data.</string>
+    <string name="grant_permission">Beri Izin</string>
+
+    <!-- Devices -->
+    <string name="device_galaxy_watch">Galaxy Watch 8</string>
+    <string name="device_esp32_watch">ESP32-C3 Watch</string>
+    <string name="device_muse_s">Muse S Gen 2</string>
+
+    <!-- Status -->
+    <string name="status_disconnected">Terputus</string>
+    <string name="status_scanning">Memindai…</string>
+    <string name="status_connecting">Menghubungkan…</string>
+    <string name="status_connected">Terhubung</string>
+    <string name="status_error">Error</string>
+
+    <!-- Actions -->
+    <string name="action_connect">Hubungkan</string>
+    <string name="action_disconnect">Putuskan</string>
+    <string name="action_start_session">Mulai Sesi</string>
+    <string name="action_stop_session">Akhiri Sesi</string>
+    <string name="action_export_csv">Ekspor CSV</string>
+
+    <!-- Service notification -->
+    <string name="notif_channel_name">Pengumpulan Data</string>
+    <string name="notif_channel_desc">Notifikasi untuk sesi pengumpulan data biosignal yang sedang berjalan</string>
+    <string name="notif_collection_title">Sesi BioCompare Berjalan</string>
+    <string name="notif_collection_text">Mengumpulkan data dari %d perangkat</string>
+</resources>

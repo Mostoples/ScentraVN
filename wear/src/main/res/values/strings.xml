@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BioCompare</string>
+    <string name="status_idle">Standby</string>
+    <string name="status_streaming">Streaming…</string>
+    <string name="action_start">Mulai</string>
+    <string name="action_stop">Stop</string>
+    <string name="hr_label">HR</string>
+    <string name="bpm">bpm</string>
+    <string name="notif_channel_name">Sesi BioCompare</string>
+    <string name="notif_streaming">Streaming sensor ke ponsel…</string>
+</resources>

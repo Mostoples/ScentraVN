@@ -1,0 +1,32 @@
+*.iml
+.gradle
+/local.properties
+/.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+**/build/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+
+# Android Studio
+.idea/
+*.iml
+
+# Misc
+*.log
+.kotlin/
+
+# OS
+Thumbs.db
+
+# Firmware build
+firmware/**/build/
+firmware/**/.pio/
+firmware/**/.vscode/

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Wearable capability advertised by this app. The phone uses
+      capabilityClient.getCapability("biocompare_watch_app", ...) to find this
+      device. The capability name MUST match WearablePaths.CAP_WATCH_APP.
+    -->
+    <string-array name="android_wear_capabilities">
+        <item>biocompare_watch_app</item>
+    </string-array>
+</resources>
