@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "scentravn": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}

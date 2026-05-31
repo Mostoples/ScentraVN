@@ -39,8 +39,8 @@ import javax.inject.Singleton
  *     [liveSamples] flow that the UI subscribes to.
  *  2. While a session is active, batch-write every sample to Room so we have
  *     a complete recording afterward.
- *  3. Drive the [EegPipeline] (raw EEG → band powers) and [HrvAnalyzer]
- *     (HR → RMSSD), then synthesise a [BioSample] STRESS_SCORE row.
+ *  3. Drive the [EegPipeline] (raw EEG → band powers) and feed heart rate into
+ *     the [StressCalibrator] so the watch-calibrated stress score updates live.
  *  4. Expose merged connection state per device for the UI status row.
  *
  * Notes on batching: a Muse S streams ~1024 EEG samples/second. Inserting
