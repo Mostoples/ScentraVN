@@ -1,7 +1,7 @@
-# ESP32-C3 BioCompare Watch Firmware
+# ESP32-C3 ScentraVN Watch Firmware
 
 Reference firmware that exactly matches the GATT contract in
-[`shared/protocol/Esp32GattProfile.kt`](../../shared/src/main/java/com/biocompare/shared/protocol/Esp32GattProfile.kt).
+[`shared/protocol/Esp32GattProfile.kt`](../../shared/src/main/java/com/scentravn/shared/protocol/Esp32GattProfile.kt).
 
 ## Hardware
 
@@ -33,7 +33,7 @@ explicitly in `initSensors()`.
    - SparkFun MAX3010x Pulse and Proximity Sensor Library
    - Adafruit MPU6050
    - Adafruit Unified Sensor
-4. Open `biocompare-watch/biocompare-watch.ino` and Upload.
+4. Open `scentravn-watch/scentravn-watch.ino` and Upload.
 
 ### PlatformIO
 ```bash

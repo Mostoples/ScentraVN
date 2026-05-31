@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    namespace = "com.biocompare.app"
-    compileSdk = 34
+    namespace = "com.scentravn.app"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.biocompare.app"
+        applicationId = "com.scentravn.app"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "0.1.0"
 
@@ -114,6 +114,10 @@ dependencies {
 
     // FFT for EEG signal processing
     implementation(libs.jtransforms)
+
+    // Firebase — bridge: push live data to web app via Realtime Database
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.database)
 
     // Testing
     testImplementation(libs.junit)

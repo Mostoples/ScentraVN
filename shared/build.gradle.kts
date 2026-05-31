@@ -5,8 +5,8 @@ plugins {
 }
 
 android {
-    namespace = "com.biocompare.shared"
-    compileSdk = 34
+    namespace = "com.scentravn.shared"
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 26

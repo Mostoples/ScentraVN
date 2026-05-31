@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    namespace = "com.biocompare.wear"
-    compileSdk = 34
+    namespace = "com.scentravn.wear"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.biocompare.app"  // Must match phone app applicationId
+        applicationId = "com.scentravn.app"  // Must match phone app applicationId
         minSdk = 30  // Wear OS 3+
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "0.1.0"
 

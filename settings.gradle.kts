@@ -21,7 +21,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BioCompare"
+rootProject.name = "ScentraVN"
 include(":app")
 include(":wear")
 include(":shared")

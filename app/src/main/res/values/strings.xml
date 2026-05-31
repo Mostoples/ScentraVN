@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BioCompare</string>
+    <string name="app_name">ScentraVN</string>
 
     <!-- Permissions -->
     <string name="perm_rationale_title">Izin Diperlukan</string>
@@ -29,6 +29,6 @@
     <!-- Service notification -->
     <string name="notif_channel_name">Pengumpulan Data</string>
     <string name="notif_channel_desc">Notifikasi untuk sesi pengumpulan data biosignal yang sedang berjalan</string>
-    <string name="notif_collection_title">Sesi BioCompare Berjalan</string>
+    <string name="notif_collection_title">Sesi ScentraVN Berjalan</string>
     <string name="notif_collection_text">Mengumpulkan data dari %d perangkat</string>
 </resources>

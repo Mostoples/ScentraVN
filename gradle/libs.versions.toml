@@ -1,6 +1,6 @@
 [versions]
 # Build tools
-agp = "8.5.2"
+agp = "8.6.1"
 kotlin = "2.0.20"
 ksp = "2.0.20-1.0.25"
 
@@ -48,6 +48,9 @@ accompanistPermissions = "0.36.0"
 
 # Math/FFT for EEG
 jtransforms = "3.1"
+
+# Firebase (bridge to web app)
+firebaseBom = "33.7.0"
 
 # Testing
 junit = "4.13.2"
@@ -117,6 +120,10 @@ accompanist-permissions = { group = "com.google.accompanist", name = "accompanis
 
 # FFT
 jtransforms = { group = "com.github.wendykierp", name = "JTransforms", version.ref = "jtransforms" }
+
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database" }
 
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }

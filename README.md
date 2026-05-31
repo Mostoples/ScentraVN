@@ -1,4 +1,4 @@
-# BioCompare
+# ScentraVN
 
 Aplikasi Android untuk membandingkan dan menggabungkan data biosignal dari
 **3 perangkat sekaligus** secara real-time:
@@ -17,20 +17,20 @@ Dibuat sebagai project lomba dengan fokus pada **comparison view** dan
 - **EEG band powers** real-time dari Muse S (Delta / Theta / Alpha / Beta / Gamma)
 - **Stress Score 0-100** otomatis dihitung dari HRV + ratio Beta/Alpha
 - Session recording → Room database
-- **Export CSV** ke Downloads/biocompare/ untuk analisis di Excel/Python/R
+- **Export CSV** ke Downloads/scentravn/ untuk analisis di Excel/Python/R
 - Companion app Wear OS minimal (auto-promote ke foreground service saat sesi aktif)
 - Foreground service di phone agar BLE tidak diputus saat layar mati
 
 ## 🏗️ Struktur Project
 
 ```
-biocompare/
+scentravn/
 ├── app/        # aplikasi phone (HUB utama)
 ├── wear/       # companion app untuk Galaxy Watch 8
 ├── shared/     # model & protocol kontrak (UUID, payload encoder)
 └── firmware/
     └── esp32-c3/
-        ├── biocompare-watch/    # Arduino sketch
+        ├── scentravn-watch/    # Arduino sketch
         └── platformio.ini       # alternatif PlatformIO
 ```
 
@@ -50,7 +50,7 @@ biocompare/
 1. **Clone repo:**
    ```bash
    git clone <REPO_URL>
-   cd biocompare
+   cd scentravn
    ```
 2. Buka folder di **Android Studio** → tunggu Gradle sync selesai
    (download dependency sekitar 2-5 menit pertama kali).
@@ -81,13 +81,13 @@ Lihat [`firmware/esp32-c3/README.md`](firmware/esp32-c3/README.md).
 Singkatnya:
 
 1. Wiring: MAX30102 + MPU6050 ke I2C bus ESP32-C3 (SDA=GPIO5, SCL=GPIO6 default).
-2. Buka `firmware/esp32-c3/biocompare-watch/biocompare-watch.ino` di Arduino IDE.
+2. Buka `firmware/esp32-c3/scentravn-watch/scentravn-watch.ino` di Arduino IDE.
 3. Install library: NimBLE-Arduino, SparkFun MAX3010x, Adafruit MPU6050,
    Adafruit Unified Sensor.
 4. Pilih board `ESP32C3 Dev Module`, USB CDC On Boot: **Enabled** → Upload.
 5. Buka Serial Monitor 115200 baud, harus terlihat:
    ```
-   BioCompare ESP32-C3 firmware booting…
+   ScentraVN ESP32-C3 firmware booting…
    [BLE] Advertising as BioWatch-ESP32
    Ready.
    ```
@@ -99,7 +99,7 @@ Singkatnya:
    - Galaxy Watch dipakai di pergelangan tangan kiri
    - ESP32-C3 watch dipakai di pergelangan tangan kanan
    - Muse S dipasang di kepala
-2. Buka aplikasi BioCompare di HP → setujui semua izin Bluetooth & Notification.
+2. Buka aplikasi ScentraVN di HP → setujui semua izin Bluetooth & Notification.
 3. Klik "Hubungkan" pada masing-masing card:
    - Galaxy Watch  → memicu Wearable Data Layer command (watch app harus aktif)
    - ESP32-C3      → BLE scan + auto-connect (10 detik timeout)
@@ -109,7 +109,7 @@ Singkatnya:
    - HR comparison chart (Galaxy Watch vs ESP32-C3)
    - EEG band powers bergerak dengan kondisi mata terbuka/tertutup
    - Stress Score berubah saat istirahat vs sesudah aktivitas
-6. Tap "Akhiri Sesi" → "Ekspor CSV" → tunjukkan hasil ekspor di Downloads/biocompare/.
+6. Tap "Akhiri Sesi" → "Ekspor CSV" → tunjukkan hasil ekspor di Downloads/scentravn/.
 ```
 
 ## 🛠️ Troubleshooting
@@ -119,7 +119,7 @@ Singkatnya:
 | ESP32 tidak ditemukan saat scan               | Pastikan device name dimulai dengan `BioWatch-ESP32`, atau ganti `Esp32GattProfile.DEVICE_NAME_PREFIX`     |
 | HR ESP32 tidak muncul                          | MAX30102 perlu kontak kulit minimal 5 detik agar beat detector mengakumulasi peaks                         |
 | Muse S tidak streaming                         | Beberapa firmware Muse butuh `s\n` (status) terlebih dulu — sudah dilakukan otomatis. Coba reset Muse.     |
-| Galaxy Watch tidak terdeteksi                  | Pastikan companion `wear` sudah terinstall dan capability `biocompare_watch_app` muncul di NodeClient log  |
+| Galaxy Watch tidak terdeteksi                  | Pastikan companion `wear` sudah terinstall dan capability `scentravn_watch_app` muncul di NodeClient log  |
 | BLE scan tidak menghasilkan apa-apa di Android 12+ | Pastikan permission `BLUETOOTH_SCAN` granted, bukan hanya `BLUETOOTH_CONNECT`                              |
 | Sesi tidak menyimpan data                      | Cek: notifikasi foreground muncul? Sesi aktif? `repository.activeSessionId` di logcat.                     |
 | EEG band powers nol                            | Muse butuh minimal 1 detik (256 sample) sebelum window pertama matang                                      |
@@ -134,7 +134,7 @@ dari dua sinyal:
 2. **Beta/Alpha ratio (EEG)** — sigmoid centered di 1.0.
    - Beta tinggi vs alpha → cortical arousal → fokus / stres mental
 
-Detail di [`StressScore.kt`](app/src/main/java/com/biocompare/app/signal/StressScore.kt).
+Detail di [`StressScore.kt`](app/src/main/java/com/scentravn/app/signal/StressScore.kt).
 
 ## 🔐 GATT Contract
 
@@ -147,7 +147,7 @@ Detail di [`StressScore.kt`](app/src/main/java/com/biocompare/app/signal/StressS
 | Muse S          | `0xFE8D`        | `273e0001-…`    | ASCII command (`d\n`, `h\n`, `p21\n`)        |
 | Muse S          | `0xFE8D`        | `273e0003-…0006`| EEG 4ch, 20-byte packets, 12×12-bit BE       |
 
-Source of truth: [`shared/src/main/java/com/biocompare/shared/protocol/`](shared/src/main/java/com/biocompare/shared/protocol/).
+Source of truth: [`shared/src/main/java/com/scentravn/shared/protocol/`](shared/src/main/java/com/scentravn/shared/protocol/).
 
 ## 📝 Lisensi
 

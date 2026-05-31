@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Bluetooth (Android 12+) -->
+    <!-- Bluetooth (Android 12+) — neverForLocation: scan dengan service UUID filter,
+         tidak butuh izin lokasi. Ini wajib karena BLUETOOTH_PRIVILEGED tidak bisa
+         diberikan ke app biasa dan scan tanpa filter membutuhkannya. -->
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
         android:usesPermissionFlags="neverForLocation"
         tools:targetApi="s" />
@@ -15,11 +17,18 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
         android:maxSdkVersion="30" />
 
-    <!-- Required for BLE scan on Android 11 and below -->
+    <!-- Lokasi dibutuhkan untuk BLE scan di Android 11 ke bawah saja -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
         android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
         android:maxSdkVersion="30" />
+
+    <!-- Network: TCP client to the Galaxy Watch wear server over local WiFi,
+         plus WiFi state to derive the local subnet for auto-scan. Without
+         INTERNET the socket() call fails with EPERM. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Foreground service for continuous data collection -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -31,11 +40,24 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
+    <!-- Health Connect — baca HR dari Galaxy Watch via Samsung Health sync -->
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE" />
+
+    <!-- Health Connect rationale activity discovery -->
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+        <intent>
+            <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+        </intent>
+    </queries>
+
     <!-- Required hardware features -->
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
+    <!-- Required for CompanionDeviceManager.associate() on Android 12+ -->
+    <uses-feature android:name="android.software.companion_device_setup" android:required="false" />
 
     <application
-        android:name=".BioCompareApplication"
+        android:name=".ScentraVNApplication"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -43,18 +65,33 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BioCompare"
+        android:theme="@style/Theme.ScentraVN"
         tools:targetApi="31">
 
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.BioCompare">
+            android:theme="@style/Theme.ScentraVN">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- Health Connect rationale (Android 14+) -->
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
         </activity>
+
+        <!-- Health Connect rationale fallback for Android 13 and below -->
+        <activity-alias
+            android:name=".ui.HealthConnectRationaleActivity"
+            android:exported="true"
+            android:targetActivity=".ui.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
+            </intent-filter>
+        </activity-alias>
 
         <!-- Foreground service for continuous BLE data collection -->
         <service
